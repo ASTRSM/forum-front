@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import LoadingBar from 'react-redux-loading-bar'
 import { Routes, Route } from 'react-router-dom'
+import Detail from './pages/Detail'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -39,7 +40,10 @@ function App () {
   return (
     <div className="App">
       <LoadingBar />
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/details/:id" element={<Detail />} />
+      </Routes>
     </div>
   )
 }

@@ -35,8 +35,14 @@ li {
   list-style: none;
 }
 
+textarea {
+  resize: none;
+  font-family: 'Inter', sans-serif;
+}
+
 body {
   font-family: 'Inter', sans-serif;
+  overflow-y: scroll;
 }
 
 .App {
@@ -129,20 +135,25 @@ body {
 
 .main-page {
   display: flex;
-  margin: 2rem auto;
+  margin: 0 auto;
   gap: 2rem;
 }
 
 .main-page h1 {
   margin-bottom: 3rem;
+  margin-top: 2rem;
 }
 
 .middle-bar {
-  max-width: 700px;
+  width: 700px;
 }
 
 aside {
-  min-width: 300px;
+  width: 250px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
 }
 
 aside h3 {
@@ -196,6 +207,24 @@ aside h3 {
   background-color: var(--background);
 }
 
+.thread-create_container {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.thread-create_container > input, .thread-create_container > textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--on-background-grey);
+  border-radius: 0.25rem;
+}
+
+.thread-create_container > *:focus {
+  outline: none;
+  border: 1px solid var(--primary);
+}
+
 .thread-container {
   display: flex;
   border-radius: 2rem;
@@ -205,8 +234,9 @@ aside h3 {
 }
 
 .thread-main {
-  flex: 1;
   padding: 0 .5rem;
+  width: 100%;
+  flex: 1;
 }
 
 /*ellipse*/
@@ -220,6 +250,8 @@ aside h3 {
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  max-width: 600px;
 }
 
 .thread-date {

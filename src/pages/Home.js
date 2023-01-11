@@ -16,7 +16,6 @@ export default function Home () {
   const [filteredThreads, setFilteredThreads] = React.useState(threads)
 
   useEffect(() => {
-    console.log('Home.js useEffect')
     dispatch(asyncPopulateUsersAndThreads())
 
     if (activeTag) {
@@ -28,7 +27,6 @@ export default function Home () {
   }, [dispatch, activeTag])
 
   const setActiveTag = (e) => {
-    console.log(e.target.id)
     dispatch(setActiveTagActionCreator(e.target.id))
   }
 

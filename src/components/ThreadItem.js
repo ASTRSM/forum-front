@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { FcLikePlaceholder, FcDislike } from 'react-icons/fc'
 import { BiComment } from 'react-icons/bi'
 import { postedAt } from '../utils'
+import { Link } from 'react-router-dom'
 
 export default function ThreadItem ({ thread, users }) {
   const user = users.find((user) => user.id === thread.ownerId)
@@ -27,7 +28,9 @@ export default function ThreadItem ({ thread, users }) {
       </div>
       <div className='thread-main'>
         <p className='thread-date'>{postedAt(thread.createdAt)}</p>
-        <h3 className='thread-title'>{thread.title}</h3>
+        <Link to={`/details/${thread.id}`} state={{ thread, user }}>
+          <h3 className='thread-title'>{thread.title}</h3>
+        </Link>
         <p className='thread-tag'>{thread.category}</p>
         <div className='thread-body'>{parse(thread.body)}</div>
         <div className='thread-user'>
