@@ -1,9 +1,11 @@
 import api from '../../utils/api'
+import { downvoteDetailActionCreator, upvoteDetailActionCreator } from '../detail/action'
 
 const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
   ADD_THREAD: 'ADD_THREAD',
-  TOGGLE_VOTE_THREAD: 'TOGGLE_VOTE_THREAD'
+  TOGGLE_VOTE_THREAD: 'TOGGLE_VOTE_THREAD',
+  TOGGLE_DOWNVOTE_THREAD: 'TOGGLE_DOWNVOTE_THREAD'
 }
 
 function receiveThreadsActionCreator (threads) {
@@ -34,6 +36,16 @@ function toggleVoteThreadActionCreator ({ threadId, userId }) {
   }
 }
 
+function toggleDownvoteThreadActionCreator ({ threadId, userId }) {
+  return {
+    type: ActionType.TOGGLE_DOWNVOTE_THREAD,
+    payload: {
+      threadId,
+      userId
+    }
+  }
+}
+
 function asyncAddThread ({ title, body, category }) {
   return async (dispatch) => {
     try {
@@ -45,16 +57,46 @@ function asyncAddThread ({ title, body, category }) {
   }
 }
 
-function asyncToogleVoteThread (threadId) {
+function asynctoggleVoteThread (threadId) {
   return async (dispatch, getState) => {
-    const { authUser } = getState()
+    const { authUser, threads } = getState()
+    const thread = threads.find((thread) => thread.id === threadId)
+
     dispatch(toggleVoteThreadActionCreator({ threadId, userId: authUser.id }))
+    dispatch(upvoteDetailActionCreator({ threadId, userId: authUser.id }))
 
     try {
-      await api.toggleVoteThread(threadId)
+      if (thread.upVotesBy.includes(authUser.id)) {
+        await api.neutralVoteThread(threadId)
+      } else {
+        await api.voteThread(threadId)
+      }
     } catch (error) {
       alert(error.message)
       dispatch(toggleVoteThreadActionCreator({ threadId, userId: authUser.id }))
+      dispatch(upvoteDetailActionCreator({ threadId, userId: authUser.id }))
+    }
+  }
+}
+
+function asynctoggleDownvoteThread (threadId) {
+  return async (dispatch, getState) => {
+    const { authUser, threads } = getState()
+    const thread = threads.find((thread) => thread.id === threadId)
+
+    dispatch(toggleDownvoteThreadActionCreator({ threadId, userId: authUser.id }))
+    dispatch(downvoteDetailActionCreator({ threadId, userId: authUser.id }))
+
+    try {
+      if (thread.downVotesBy.includes(authUser.id)) {
+        await api.neutralVoteThread(threadId)
+      } else {
+        await api.downvoteThread(threadId)
+      }
+    } catch (error) {
+      alert(error.message)
+      dispatch(toggleDownvoteThreadActionCreator({ threadId, userId: authUser.id }))
+      dispatch(downvoteDetailActionCreator({ threadId, userId: authUser.id }))
     }
   }
 }
@@ -65,5 +107,6 @@ export {
   addThreadActionCreator,
   toggleVoteThreadActionCreator,
   asyncAddThread,
-  asyncToogleVoteThread
+  asynctoggleVoteThread,
+  asynctoggleDownvoteThread
 }

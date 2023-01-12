@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
-import { BiComment } from 'react-icons/bi'
-import { FcDislike, FcLikePlaceholder } from 'react-icons/fc'
 import { Link, useLocation } from 'react-router-dom'
 import { postedAt } from '../utils'
 import parse from 'html-react-parser'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { asyncGetDetail } from '../states/detail/action'
 import CommentSection from '../components/CommentSection'
+import ThreadInteraction from '../components/ThreadInteraction'
 
 export default function Detail () {
   const location = useLocation()
+  const { details } = useSelector((states) => states)
   const { thread, user } = location.state
   const dispatch = useDispatch()
 
@@ -24,21 +24,7 @@ export default function Detail () {
         <h1>Details</h1>
       </header>
       <div className='thread-container'>
-        <div className="thread-interaction">
-          <button className="btn-interaction transition-01">
-            <FcLikePlaceholder />
-            <span>{thread.upVotesBy.length}</span>
-          </button>
-          <button className="btn-interaction transition-01">
-            <FcDislike />
-            <i className="fas fa-thumbs-down"></i>
-            <span>{thread.downVotesBy.length}</span>
-          </button>
-          <button className="btn-interaction transition-01">
-            <BiComment />
-            <span>{thread.totalComments}</span>
-          </button>
-        </div>
+        <ThreadInteraction thread={details}/>
         <div className='thread-main'>
           <p className='thread-date'>{postedAt(thread.createdAt)}</p>
           <h3 className='thread-title'>{thread.title}</h3>
