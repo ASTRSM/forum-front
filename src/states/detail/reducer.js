@@ -29,6 +29,42 @@ export default function detailReducer (detail = {}, action = {}) {
           ? detail.upVotesBy.filter((id) => id !== action.payload.userId)
           : detail.upVotesBy
       }
+    case ActionType.UPVOTE_COMMENT:
+      return {
+        ...detail,
+        comments: detail.comments.map((comment) => {
+          if (comment.id === action.payload.commentId) {
+            return {
+              ...comment,
+              upVotesBy: comment.upVotesBy.includes(action.payload.userId)
+                ? comment.upVotesBy.filter((id) => id !== action.payload.userId)
+                : comment.upVotesBy.concat([action.payload.userId]),
+              downVotesBy: comment.downVotesBy.includes(action.payload.userId)
+                ? comment.downVotesBy.filter((id) => id !== action.payload.userId)
+                : comment.downVotesBy
+            }
+          }
+          return comment
+        })
+      }
+    case ActionType.DOWNVOTE_COMMENT:
+      return {
+        ...detail,
+        comments: detail.comments.map((comment) => {
+          if (comment.id === action.payload.commentId) {
+            return {
+              ...comment,
+              downVotesBy: comment.downVotesBy.includes(action.payload.userId)
+                ? comment.downVotesBy.filter((id) => id !== action.payload.userId)
+                : comment.downVotesBy.concat([action.payload.userId]),
+              upVotesBy: comment.upVotesBy.includes(action.payload.userId)
+                ? comment.upVotesBy.filter((id) => id !== action.payload.userId)
+                : comment.upVotesBy
+            }
+          }
+          return comment
+        })
+      }
     default:
       return detail
   }

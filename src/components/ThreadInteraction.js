@@ -23,7 +23,7 @@ export default function ThreadInteraction ({ thread }) {
   const onDownvote = () => {
     dispatch(asynctoggleDownvoteThread(thread.id))
   }
-  console.log(thread)
+
   return (
     <div className="thread-interaction">
     <button type='button' className="btn-interaction transition-01" onClick={onUpvote}>

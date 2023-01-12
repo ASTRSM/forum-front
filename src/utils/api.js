@@ -257,6 +257,60 @@ const api = (() => {
     return vote
   }
 
+  async function upvoteComment (commentId, threadId) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`, {
+      method: 'POST'
+    })
+
+    const responseJson = await response.json()
+
+    const { status, message } = responseJson
+
+    if (status !== 'success') {
+      throw new Error(message)
+    }
+
+    const { data: { vote } } = responseJson
+
+    return vote
+  }
+
+  async function downvoteComment (commentId, threadId) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`, {
+      method: 'POST'
+    })
+
+    const responseJson = await response.json()
+
+    const { status, message } = responseJson
+
+    if (status !== 'success') {
+      throw new Error(message)
+    }
+
+    const { data: { vote } } = responseJson
+
+    return vote
+  }
+
+  async function neutralVoteComment (commentId, threadId) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`, {
+      method: 'POST'
+    })
+
+    const responseJson = await response.json()
+
+    const { status, message } = responseJson
+
+    if (status !== 'success') {
+      throw new Error(message)
+    }
+
+    const { data: { vote } } = responseJson
+
+    return vote
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -271,7 +325,10 @@ const api = (() => {
     getLeaderboard,
     voteThread,
     neutralVoteThread,
-    downvoteThread
+    downvoteThread,
+    upvoteComment,
+    downvoteComment,
+    neutralVoteComment
   }
 })()
 

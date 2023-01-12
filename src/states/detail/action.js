@@ -43,17 +43,17 @@ function createCommentActionCreator (comment) {
   }
 }
 
-function upvoteCommentActionCreator (commentId) {
+function upvoteCommentActionCreator (commentId, userId) {
   return {
     type: ActionType.UPVOTE_COMMENT,
-    payload: commentId
+    payload: { commentId, userId }
   }
 }
 
-function downvoteCommentActionCreator (commentId) {
+function downvoteCommentActionCreator (commentId, userId) {
   return {
     type: ActionType.DOWNVOTE_COMMENT,
-    payload: commentId
+    payload: { commentId, userId }
   }
 }
 
@@ -85,17 +85,17 @@ function asyncUpvoteComment (commentId) {
   return async (dispatch, getState) => {
     const { details, authUser } = getState()
     const comment = details.comments.find(comment => comment.id === commentId)
-    dispatch(upvoteCommentActionCreator(commentId))
+    dispatch(upvoteCommentActionCreator(commentId, authUser.id))
 
     try {
       if (comment.upVotesBy.includes(authUser.id)) {
-        await api.neutralVoteComment(commentId)
+        await api.neutralVoteComment(commentId, details.id)
       } else {
-        await api.upvoteComment(commentId)
+        await api.upvoteComment(commentId, details.id)
       }
     } catch (error) {
       alert(error.message)
-      dispatch(upvoteCommentActionCreator(commentId))
+      dispatch(upvoteCommentActionCreator(commentId, authUser.id))
     }
   }
 }
@@ -104,17 +104,17 @@ function asyncDownvoteComment (commentId) {
   return async (dispatch, getState) => {
     const { details, authUser } = getState()
     const comment = details.comments.find(comment => comment.id === commentId)
-    dispatch(downvoteCommentActionCreator(commentId))
+    dispatch(downvoteCommentActionCreator(commentId, authUser.id))
 
     try {
       if (comment.downVotesBy.includes(authUser.id)) {
-        await api.neutralVoteComment(commentId)
+        await api.neutralVoteComment(commentId, details.id)
       } else {
-        await api.downvoteComment(commentId)
+        await api.downvoteComment(commentId, details.id)
       }
     } catch (error) {
       alert(error.message)
-      dispatch(downvoteCommentActionCreator(commentId))
+      dispatch(downvoteCommentActionCreator(commentId, authUser.id))
     }
   }
 }
