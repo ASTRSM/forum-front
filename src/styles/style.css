@@ -166,7 +166,6 @@ body {
 
 aside {
   width: 250px;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   align-self: flex-start;
@@ -407,5 +406,23 @@ aside h3 {
 @media screen and (max-width: 768px) {
   .auth-form input {
     width: 100%;
+  }
+  .main-page {
+    flex-flow: column;
+    align-items: center;
+  }
+  aside {
+    position: relative;
+    align-self: auto;
+  }
+  .left-bar h1 {
+    text-align: center;
+  }
+  .middle-bar {
+    margin: .5rem;
+  }
+  .detail {
+    width: 100%;
+    margin: .5rem;
   }
 }
