@@ -70,8 +70,25 @@ body {
   cursor: pointer;
 }
 
-.button:hover, a:hover {
+.red-button {
+  padding: 0.5rem;
+  border: 1px solid var(--error);
+  border-radius: 0.25rem;
+  background-color: var(--error);
+  color: var(--background);
+  cursor: pointer;
+}
+
+.button:hover, a:hover, .red-button:hover {
   opacity: 0.5;
+}
+
+.logout-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2rem;
+  width: 100px;
 }
 
 .link-icon {
@@ -79,7 +96,6 @@ body {
   color: var(--on-background);
   display: flex;
   gap: 1rem;
-  margin: .5rem;
   align-items: center;
 }
 
@@ -136,7 +152,7 @@ body {
 .main-page {
   display: flex;
   margin: 0 auto;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .main-page h1 {
@@ -160,11 +176,22 @@ aside h3 {
   font-weight: 100;
 }
 
+.left-bar_content {
+  margin: .5rem;
+}
+
+.left-bar_content-item {
+  margin: 1.5rem .5rem;
+}
+
+.left-bar_content-item > *:first-child {
+  margin-bottom: .5rem;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: .5rem;
-  margin: .5em;
 }
 
 .tag {
@@ -205,6 +232,12 @@ aside h3 {
 
 .tag-active::before {
   background-color: var(--background);
+}
+
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  margin: .5rem 0;
 }
 
 .thread-create_container {
