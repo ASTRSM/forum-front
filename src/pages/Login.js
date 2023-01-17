@@ -14,7 +14,7 @@ export default function Login () {
 
   return (
     <div className='auth'>
-      <h2>Sign In</h2>
+      <h2>Login</h2>
       <form onSubmit={onLogin} className='auth-form'>
         <label htmlFor='email' className='auth-form_input'>
         <p>Email</p>
@@ -24,7 +24,7 @@ export default function Login () {
         <p>Password</p>
         <input type='password' id='password' name='password' />
         </label>
-        <button type='submit' className='button transition-02'>Sign In</button>
+        <button type='submit' className='button transition-02'>Login</button>
       </form>
       <p>
           Don&apos;t have an account?
