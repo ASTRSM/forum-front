@@ -1,3 +1,12 @@
+/**
+ * test scenarios:
+ * - should display the login page
+ * - should call alert when email is empty
+ * - should call alert when password is empty
+ * - should call alert when the credentials are invalid
+ * - should login successfully
+ */
+
 describe('Login', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
