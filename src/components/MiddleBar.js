@@ -21,7 +21,7 @@ export default function MiddleBar ({ threads, users }) {
   return (
     <div className='middle-bar'>
       <h1>Threads</h1>
-        <form onSubmit={handleSubmit} className='thread-create_container'>
+        <form onSubmit={handleSubmit} className='thread-create_container' data-testid='thread-create'>
           <input type='text' placeholder='Insert a title' name='title' />
           <input type='text' placeholder='Insert a tag/category' name='category' />
           <textarea placeholder='Insert a body' name='body' rows='5' />

@@ -2,7 +2,9 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true
+        "node": true,
+        "jest": true,
+        "cypress/globals": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -16,7 +18,9 @@
     },
     "plugins": [
         "react",
-        "react-hooks"
+        "react-hooks",
+        "jest",
+        "cypress"
     ],
     "rules": {
         "react-hooks/rules-of-hooks": "error",

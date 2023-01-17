@@ -121,6 +121,10 @@ function asyncDownvoteComment (commentId) {
 
 export {
   ActionType,
+  getDetailActionCreator,
+  createCommentActionCreator,
+  upvoteCommentActionCreator,
+  downvoteCommentActionCreator,
   asyncGetDetail,
   asyncCreateComment,
   asyncUpvoteComment,

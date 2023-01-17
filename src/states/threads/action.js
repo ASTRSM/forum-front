@@ -106,6 +106,7 @@ export {
   receiveThreadsActionCreator,
   addThreadActionCreator,
   toggleVoteThreadActionCreator,
+  toggleDownvoteThreadActionCreator,
   asyncAddThread,
   asynctoggleVoteThread,
   asynctoggleDownvoteThread

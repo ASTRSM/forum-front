@@ -18,7 +18,7 @@ export default function CommentInput () {
       <div className="comment-input_profile">
         <img src={authUser?.avatar} alt={authUser?.name} className='avatar'/>
       </div>
-      <form className='comment-input' onSubmit={onCommmentSubmit}>
+      <form className='comment-input' onSubmit={onCommmentSubmit} data-testid='comment-input'>
         <textarea name="comment" id="comment" rows="3" placeholder='Post a nice comments...'></textarea>
         <button className='button transition-01'>Post</button>
       </form>
