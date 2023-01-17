@@ -26,11 +26,11 @@ export default function ThreadInteraction ({ thread }) {
 
   return (
     <div className="thread-interaction">
-    <button type='button' className="btn-interaction transition-01" onClick={onUpvote}>
+    <button type='button' className="btn-interaction transition-01" onClick={onUpvote} data-testid='upvote-btn'>
       <FcLike />
       <span>{isUpvoted ? <b>{thread?.upVotesBy?.length}</b> : thread?.upVotesBy?.length}</span>
     </button>
-    <button type='button' className="btn-interaction transition-01" onClick={onDownvote}>
+    <button type='button' className="btn-interaction transition-01" onClick={onDownvote} data-testid='downvote-btn'>
       <FcDislike />
       <i className="fas fa-thumbs-down"></i>
       <span>{isDownvoted ? <b>{thread?.downVotesBy?.length}</b> : thread?.downVotesBy?.length}</span>

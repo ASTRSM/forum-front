@@ -20,11 +20,11 @@ export default function CommentItem ({ comment }) {
   return (
     <div className='thread-container'>
       <div className="thread-interaction">
-        <button className="btn-interaction transition-01" onClick={onUpvote}>
+        <button className="btn-interaction transition-01" onClick={onUpvote} data-testid='upvote-btn'>
           <FcLikePlaceholder />
           <span>{comment.upVotesBy.length}</span>
         </button>
-        <button className="btn-interaction transition-01" onClick={onDownvote}>
+        <button className="btn-interaction transition-01" onClick={onDownvote} data-testid='downvote-btn'>
           <FcDislike />
           <i className="fas fa-thumbs-down"></i>
           <span>{comment.downVotesBy.length}</span>
